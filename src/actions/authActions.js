@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
-import config from "../Config";
+import config from "../config";
 import QueryString from 'query-string';
 import {
     LOGIN_USER,

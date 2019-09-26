@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import config from '../Config';
+import config from '../config';
 import axios from 'axios';
 import {
     BLOG_SUCCESS,

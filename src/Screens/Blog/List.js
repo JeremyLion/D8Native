@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, ActivityIndicator, Dimensions, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
 import { Card, Text, Image, Header } from "react-native-elements";
-import config from '../../Config';
+import config from '../../config';
 import { connect } from 'react-redux';
 import { listPost } from '../../actions/blogActions'
 import { bindActionCreators } from "redux";

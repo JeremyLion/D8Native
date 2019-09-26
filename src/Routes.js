@@ -69,7 +69,7 @@ export const SignedIn = createBottomTabNavigator({
         }
     }
 },
-    /*{
+    {
         defaultNavigationOptions: ({ navigation }) => ({
             // eslint-disable-next-line react/prop-types
             tabBarIcon: ({ focused }) => {
@@ -111,15 +111,15 @@ export const SignedIn = createBottomTabNavigator({
         tabBarOptions: {
             showLabel: true,
             style: {
-                backgroundColor: theme.white,
+                backgroundColor: '#000',
                 borderTopWidth: 0.5,
                 borderTopColor: '#d6d6d6',
             },
             labelStyle: {
-                color: theme.grey,
+                color: "#ccc",
             },
         },
-    },*/
+    },
 );
 
 /**

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, StyleSheet, Dimensions } from "react-native";
+import { Image, StyleSheet, Dimensions, StatusBar } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authActions";
@@ -26,7 +26,7 @@ class Login extends Component {
     }
 
     submitHandler(e) {
-        const { credentials } = this.state
+        const { credentials } = this.state;
         this.props.dispatch(loginUser(credentials))
     }
 
@@ -36,7 +36,8 @@ class Login extends Component {
                 enabled
                 behavior="padding"
                 style={{ flex: 1 }}>
-                <Block center middle style={{ backgroundColor: '#0c0a1c'}}>
+                <StatusBar barStyle="light-content" translucent={true} />
+                <Block center middle>
                     <Block center style={{ marginTop: 100, height: 200, width: 200 }}>
                         <Image
                             source={require('../assets/images/logo.png')}
@@ -63,11 +64,13 @@ class Login extends Component {
                                 onChangeText={ (txt) => this.handleChange("password", txt) }
                                 value={ this.state.credentials.password }
                             />
-                            <Text style={{ ...styles.textBtns, marginTop: 20, width: width - 70, textAlign:'right' }}>Forgot password?</Text>
+                            <Text
+                                style={{ ...styles.textBtns, ...styles.forgotBtn }}>Forgot password?</Text>
                             <Button
                                 title="Login"
+                                type="outline"
+                                titleStyle={{ color: '#000' }}
                                 buttonStyle={ styles.loginBtn }
-                                titleStyle={{ color: '#0c0a1c' }}
                                 onPress={ this.submitHandler.bind(this) }
                             />
                             <Block center>
@@ -98,25 +101,36 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     inputStyle: {
-        color: '#fff'
+        color: '#000'
     },
     labelStyle: {
-        color: '#fff',
+        color: '#000',
         fontSize: 14,
-        fontWeight: 'bold'
     },
     textBtns: {
-        color: '#fff',
+        color: '#000',
         marginTop: 30,
+    },
+    forgotBtn: {
+        marginTop: 20,
+        marginBottom: 20,
+        width: width - 70,
+        color: '#666666',
+        textAlign:'right'
     },
     loginBtn: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20,
-        backgroundColor: '#fff',
-        width: width - 70,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#eee',
+        shadowColor: 'rgba(0,0,0, .1)',
+        shadowOffset: { height: 1, width: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 1,
+        width: width - 70
     }
-})
+});
 
 
 const mapStateToProps = state => {

@@ -20,7 +20,8 @@ export const authLogout = () => {
 export const loginUser = (credentials) => {
     return (dispatch) => {
         dispatch({ type: LOGIN_USER });
-        axios.post(config.base + '/oauth/token', QueryString.stringify({
+        dispatch({ type: LOGIN_SUCCESS, payload: 'dummy token'});
+        /*axios.post(config.base + '/oauth/token', QueryString.stringify({
             username: credentials.username,
             password: credentials.password,
             grant_type: config.oauth.grant_type,
@@ -36,7 +37,7 @@ export const loginUser = (credentials) => {
             dispatch({
                 type: LOGIN_FAIL, payload: err.response
             })
-        })
+        })*/
     };
 }
 

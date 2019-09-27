@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from "../../actions";
 
-class listItem extends Component {
+class listDetail extends Component {
 
     constructor(props) {
         super(props);
@@ -17,24 +17,25 @@ class listItem extends Component {
     }
 
     renderPost = () => {
-        const { postItem } = this.props
+        const {postDetail} = this.props
 
-        return (postItem.data.map(el => {
-            return (
-                postItem.included.map(el_img => {
-                    if (el.relationships.field_image.data.id === el_img.id) {
-                        return (
-                            <Card
-                                key={el.id}
-                                containerStyle={styles.containerWrapper}
-                                image={{uri: config.base + el_img.attributes.uri.url}}
-                                imageProps={{'PlaceholderContent': <ActivityIndicator/>}}>
-                                <Text>{el.attributes.title}</Text>
-                            </Card>
-                        )
-                    }
-                })
-            )}
+        return (postDetail.data.map(el => {
+                return (
+                    postDetail.included.map(el_img => {
+                        if (el.relationships.field_image.data.id === el_img.id) {
+                            return (
+                                <Card
+                                    key={el.id}
+                                    containerStyle={styles.containerWrapper}
+                                    image={{uri: config.base + el_img.attributes.uri.url}}
+                                    imageProps={{'PlaceholderContent': <ActivityIndicator/>}}>
+                                    <Text>{el.attributes.title}</Text>
+                                </Card>
+                            )
+                        }
+                    })
+                )
+            }
         ))
     }
 
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        postItem: state.blog.payload,
+        postDetail: state.blog.payload,
         isLoading: state.blog.isLoading,
     }
 }
@@ -74,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(Actions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(listItem);
+export default connect(mapStateToProps, mapDispatchToProps)(listDetail);

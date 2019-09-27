@@ -8,6 +8,7 @@ import {
 } from "../actions/types";
 
 let INITIAL_STATE = {
+    payload: [],
     isLoading: true
 }
 
@@ -16,13 +17,13 @@ const blog = (state = INITIAL_STATE, action) => {
         case BLOG_ADD:
             return { ...state, isLoading:true }
         case BLOG_LIST:
-            return { state, payload:action.payload }
+            return { ...state, isLoading: true }
         case BLOG_ITEM:
-            return { state, payload:action.payload, isLoading: false }
+            return { ...state, isLoading: true }
         case BLOG_SUCCESS:
-            return { state, payload: action.payload }
+            return { ...state, payload: action.payload, isLoading: false}
         case BLOG_FAIL:
-            return { state, payload:action.payload, isLoading: false }
+            return { ...state, payload:action.payload, isLoading: false }
         default:
             return state
     }

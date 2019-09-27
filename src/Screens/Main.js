@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Card, Text, Header } from "react-native-elements";
+import { Tabs } from 'native-base';
 import { connect } from 'react-redux';
 
 class Main extends Component {

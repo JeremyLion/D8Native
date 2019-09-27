@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, ActivityIndicator, Dimensions, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
 import { Card, Text, Image, Header } from "react-native-elements";
+import { Tab, Tabs } from 'native-base';
 import config from '../../config';
 import { connect } from 'react-redux';
-import { listPost } from '../../actions/blogActions'
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import { Block } from '../../Components'
 
 class List extends Component {
 
@@ -18,7 +19,7 @@ class List extends Component {
     }
 
     renderList = () => {
-        const { lists } = this.props
+        const { lists } = this.props;
         if(lists) {
             return (lists.data.map(el => {
                 return (
@@ -30,7 +31,6 @@ class List extends Component {
                                 return (
                                     <Card
                                         key={el.id}
-                                        containerStyle={ styles.containerWrapper }
                                         image={{ uri: config.base + el_img.attributes.uri.url }}
                                         imageProps={{ 'PlaceholderContent': <ActivityIndicator /> }}>
                                         <Text>{el.attributes.title}</Text>
@@ -55,9 +55,21 @@ class List extends Component {
         }
 
         return (
-            <ScrollView>
-                { this.renderList() }
-            </ScrollView>
+            <Block>
+                <Tabs>
+                    <Tab heading="Latest">
+                        <ScrollView>
+                            { this.renderList() }
+                        </ScrollView>
+                    </Tab>
+                    <Tab heading="Articles">
+                        <Text>Tab 2</Text>
+                    </Tab>
+                    <Tab heading="Pages">
+                        <Text>Tab</Text>
+                    </Tab>
+                </Tabs>
+            </Block>
         );
     }
 }

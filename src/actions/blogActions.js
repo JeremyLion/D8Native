@@ -11,9 +11,10 @@ import {
 
 export const listPost = (contentType) => {
     return (dispatch) => {
+        dispatch({ type: BLOG_LIST })
         axios.get(config.base + '/api/node/' + contentType)
         .then(res => {
-            dispatch({ type: BLOG_LIST, payload: res.data });
+            dispatch({ type: BLOG_SUCCESS, payload: res.data });
         })
         .catch(err => {
             dispatch({ type: BLOG_FAIL, payload: err.response});
@@ -23,9 +24,10 @@ export const listPost = (contentType) => {
 
 export const loadPost = (contentType, id) => {
     return (dispatch) => {
+        dispatch({ type: BLOG_ITEM })
         axios.get( config.base + '/api/node/' + contentType + '/' + id)
         .then(res => {
-            dispatch({ type: BLOG_ITEM, payload: res.data });
+            dispatch({ type: BLOG_SUCCESS, payload: res.data });
         })
         .catch(err => {
             dispatch({ type: BLOG_FAIL, payload: err.response});

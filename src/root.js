@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { loginSuccess } from './actions';
-import { createRootNavigator } from './Routes';
+import { createRootNavigator } from './routes';
 
 /**
  * Root component connecting routes together

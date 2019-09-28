@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import { StyleSheet, ActivityIndicator, Dimensions, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
-import { Card, Text, Image, Header } from "react-native-elements";
-import { Tab, Tabs } from 'native-base';
+import { Card, Text, ButtonGroup } from "react-native-elements";
 import config from '../../config';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
-import { Block } from '../../Components'
+import { Block } from '../../components'
 
 class List extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            selectedIndex: 1
+        }
+
     }
 
     componentDidMount() {
-       this.props.listPost('article?include=field_image');
+        this.props.listPost('article?include=field_image');
     }
 
     renderList = () => {
@@ -25,7 +28,7 @@ class List extends Component {
                 return (
                     <TouchableOpacity
                         key={el.id}
-                        onPress={ () => this.props.navigation.navigate('PostItem', { title: el.attributes.title, nid: el.id }) }>
+                        onPress={ () => this.props.navigation.navigate({routeName: 'PostItem', key:'postItem_' + el.id, params: { nid: el.id }})}>
                         {lists.included.map(el_img => {
                             if(el.relationships.field_image.data.id === el_img.id) {
                                 return (
@@ -34,6 +37,7 @@ class List extends Component {
                                         image={{ uri: config.base + el_img.attributes.uri.url }}
                                         imageProps={{ 'PlaceholderContent': <ActivityIndicator /> }}>
                                         <Text>{el.attributes.title}</Text>
+                                        <Text></Text>
                                     </Card>
                                 )}
                             })
@@ -44,7 +48,17 @@ class List extends Component {
         }
     }
 
+    updateIndex (selectedIndex) {
+        this.setState({selectedIndex})
+    }
+
     render() {
+        const component1 = () => <Text>Latest</Text>
+        const component2 = () => <Text>Most Visited</Text>
+        const component3 = () => <Text>Top Rated</Text>
+
+        const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
+        const { selectedIndex } = this.state
 
         if(this.props.isLoading === true) {
             return (
@@ -56,19 +70,12 @@ class List extends Component {
 
         return (
             <Block>
-                <Tabs>
-                    <Tab heading="Latest">
-                        <ScrollView>
-                            { this.renderList() }
-                        </ScrollView>
-                    </Tab>
-                    <Tab heading="Articles">
-                        <Text>Tab 2</Text>
-                    </Tab>
-                    <Tab heading="Pages">
-                        <Text>Tab</Text>
-                    </Tab>
-                </Tabs>
+                <ButtonGroup
+                    onPress={this.updateIndex}
+                    selectedIndex={selectedIndex}
+                    buttons={buttons}
+                    containerStyle={{ height: 30, marginLeft:15, marginRight:15 }} />
+                { this.renderList() }
             </Block>
         );
     }
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        lists: state.blog.payload,
+        lists: state.blog.listItems,
         isLoading: state.blog.isLoading
     }
 }

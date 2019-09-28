@@ -3,7 +3,7 @@ import { Image, StyleSheet, Dimensions, StatusBar } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authActions";
-import Block from "../Components/Block"
+import Block from "../components/Block"
 const { width } = Dimensions.get('window');
 
 class Login extends Component {
@@ -41,7 +41,7 @@ class Login extends Component {
                     <Block center style={{ marginTop: 100, height: 200, width: 200 }}>
                         <Image
                             source={require('../assets/images/logo.png')}
-                            style={{ height: 220, width: 215, resizeMode: 'stretch'}}
+                            style={{ height: 227, width: 239, resizeMode: 'stretch'}}
                         />
 
                     </Block>

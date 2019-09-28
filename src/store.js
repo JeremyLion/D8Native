@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './Reducers/index';
+import rootReducer from './reducers/index';
 
 /**
  * Configuring persist

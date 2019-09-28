@@ -9,8 +9,9 @@ export const AUTH_CHECK = "auth_check";
 export const AUTH_USER = "auth_user";
 
 /**====================================================================*/
-/** Blog
+/** blog
 /**====================================================================*/
+export const BLOG_CLEAR = 'blog_clear';
 export const BLOG_SUCCESS = 'blog_success';
 export const BLOG_FAIL = 'blog_fail';
 export const BLOG_LIST = 'blog_list';

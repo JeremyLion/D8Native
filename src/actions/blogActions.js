@@ -6,15 +6,16 @@ import {
     BLOG_FAIL,
     BLOG_LIST,
     BLOG_ADD,
-    BLOG_ITEM
+    BLOG_ITEM,
+    BLOG_CLEAR
 } from "./types";
 
 export const listPost = (contentType) => {
     return (dispatch) => {
-        dispatch({ type: BLOG_LIST })
+        dispatch({ type: BLOG_CLEAR })
         axios.get(config.base + '/api/node/' + contentType)
         .then(res => {
-            dispatch({ type: BLOG_SUCCESS, payload: res.data });
+            dispatch({ type: BLOG_LIST, payload: res.data });
         })
         .catch(err => {
             dispatch({ type: BLOG_FAIL, payload: err.response});
@@ -24,10 +25,10 @@ export const listPost = (contentType) => {
 
 export const loadPost = (contentType, id) => {
     return (dispatch) => {
-        dispatch({ type: BLOG_ITEM })
+        dispatch({ type: BLOG_CLEAR })
         axios.get( config.base + '/api/node/' + contentType + '/' + id)
         .then(res => {
-            dispatch({ type: BLOG_SUCCESS, payload: res.data });
+            dispatch({ type: BLOG_ITEM, payload: res.data });
         })
         .catch(err => {
             dispatch({ type: BLOG_FAIL, payload: err.response});

@@ -4,26 +4,29 @@ import {
     BLOG_FAIL,
     BLOG_LIST,
     BLOG_ADD,
-    BLOG_ITEM
+    BLOG_ITEM,
+    BLOG_CLEAR
 } from "../actions/types";
 
 let INITIAL_STATE = {
-    payload: [],
+    listItems: {},
+    listDetail: {},
     isLoading: true
 }
 
 const blog = (state = INITIAL_STATE, action) => {
     switch(action.type) {
+        case BLOG_CLEAR:
+            return INITIAL_STATE
         case BLOG_ADD:
             return { ...state, isLoading:true }
         case BLOG_LIST:
-            return { ...state, isLoading: true }
+            return {...state, listItems: action.payload, isLoading: false }
         case BLOG_ITEM:
-            return { ...state, isLoading: true }
+            return {...state, listDetail: action.payload, isLoading: false}
         case BLOG_SUCCESS:
-            return { ...state, payload: action.payload, isLoading: false}
         case BLOG_FAIL:
-            return { ...state, payload:action.payload, isLoading: false }
+            return { ...state, payload: action.payload, isLoading: false }
         default:
             return state
     }

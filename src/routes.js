@@ -5,20 +5,19 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Header, Icon } from 'react-native-elements';
 
-import Login from './Screens/Login';
-import MainScreen from './Screens/Main';
-import ShopPlans from './Screens/ShopPlans';
-import PostScreen from "./Screens/Blog/List";
-import listDetail from './Screens/Blog/listDetail'
-import AddPost from './Screens/Blog/Form';
-import Account from "./Screens/Account";
+import Login from './screens/login';
+import MainScreen from './screens/main';
+import ShopPlans from './screens/shopPlans';
+import PostScreen from "./screens/blog/List";
+import listDetail from './screens/blog/listDetail'
+import AddPost from './screens/blog/form';
+import Account from "./screens/account";
 
 const ScreenConfig = navigation => {
-    console.log(navigation);
     return {
         header: props => (
             <Header
-                containerStyle={{ backgroundColor: '#fff', borderBottomWidth: 1, borderColor: '#000' }}
+                containerStyle={{ backgroundColor: '#fff', borderBottomWidth: 0, borderColor: '#000', paddingRight:20, paddingLeft: 20 }}
                 leftComponent={{ icon: 'menu', color: '#000', type: 'feather', size: 18 }}
                 centerComponent={{ text: navigation, style: { color: '#000'}}}
                 rightComponent={{ icon: 'bell-o', color: '#000', type: 'font-awesome', size: 18 }}
@@ -46,9 +45,9 @@ export const AuthNavigator = createStackNavigator({
 export const PostNavigator = createStackNavigator({
     PostItem: {
         screen: listDetail,
-        navigationOptions: ({ navigation }) => ({
-            //title: navigation.state.params.name
-        })
+        navigationOptions : {
+            gesturesEnabled: true
+        }
     },
 });
 
@@ -62,7 +61,7 @@ export const SignedIn = createBottomTabNavigator({
             headerTitle: "Main",
             tabBarLabel: "Main",
             tabBarIcon: ({ tintColor }) => (
-                <Icon type="font-awesome" name="home" color={ tintColor } />
+                <Icon type="ionicon" name="ios-home" color={ tintColor } />
             ),
         }
     },
@@ -72,7 +71,7 @@ export const SignedIn = createBottomTabNavigator({
             headerTitle: "Main",
             tabBarLabel: "Main",
             tabBarIcon: ({ tintColor }) => (
-                <Icon type="antdesign" name="home" color={ tintColor } />
+                <Icon type="SimpleLineIcons" name="home" color={ tintColor } />
             )
         }
     },
@@ -104,17 +103,22 @@ export const SignedIn = createBottomTabNavigator({
         },
         tabBarOptions: {
             showLabel: true,
+            tabStyle:{
+                //paddingVertical: 10
+            },
             style: {
                 backgroundColor: '#fff',
                 borderTopWidth: 0.5,
-//              paddingTop: 10
             },
             labelStyle: {
                 color: "#ccc",
             },
-            activeTintColor: '#ff0000',
+            activeTintColor: '#000',
             inactiveColor: '#454545'
         },
+        iconStyle: {
+
+        }
     },
 );
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginSuccess } from './actions';
 import { createRootNavigator } from './routes';
@@ -20,7 +20,7 @@ class Root extends Component {
  */
 const mapPropsToState = (state) => {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
     }
 };
 

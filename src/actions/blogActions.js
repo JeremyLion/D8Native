@@ -7,32 +7,32 @@ import {
     BLOG_LIST,
     BLOG_ADD,
     BLOG_ITEM,
-    BLOG_CLEAR
-} from "./types";
+    BLOG_CLEAR,
+} from './types';
 
 export const listPost = (contentType) => {
     return (dispatch) => {
-        dispatch({ type: BLOG_CLEAR })
+        dispatch({ type: BLOG_CLEAR });
         axios.get(config.base + '/api/node/' + contentType)
         .then(res => {
             dispatch({ type: BLOG_LIST, payload: res.data });
         })
         .catch(err => {
             dispatch({ type: BLOG_FAIL, payload: err.response});
-        })
+        });
     }
 }
 
 export const loadPost = (contentType, id) => {
     return (dispatch) => {
-        dispatch({ type: BLOG_CLEAR })
+        dispatch({ type: BLOG_CLEAR });
         axios.get( config.base + '/api/node/' + contentType + '/' + id)
         .then(res => {
             dispatch({ type: BLOG_ITEM, payload: res.data });
         })
         .catch(err => {
             dispatch({ type: BLOG_FAIL, payload: err.response});
-        })
+        });
     }
 }
 
@@ -42,14 +42,14 @@ export const addPost = (attributes, contentType) => {
         {
             data: {
                     attributes,
-                    type: "node--" + contentType
+                    type: 'node--' + contentType
                 }
             },
         {
             headers: {
-                "Accept": "application/vnd.api+json",
-                "Content-Type": "application/vnd.api+json",
-                "Authorization": "",
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+                'Authorization': '',
             }
         },
         ).then(res => {
@@ -57,7 +57,7 @@ export const addPost = (attributes, contentType) => {
             dispatch({ type: BLOG_ADD, payload: res.data });
         }).catch(err => {
             console.log(err.response)
-            dispatch({ type: BLOG_FAIL })
-        })
+            dispatch({ type: BLOG_FAIL });
+        });
     }
 }

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { StyleSheet } from "react-native";
-import { Card, Text, Button } from "react-native-elements";
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { authLogout } from "../actions/authActions";
+import { authLogout } from '../actions/authActions';
 
 class ShopPlans extends Component {
     constructor(props) {
@@ -10,13 +10,13 @@ class ShopPlans extends Component {
     }
 
     submitHandler(e){
-        this.props.dispatch(authLogout())
+        this.props.dispatch(authLogout());
     }
 
     render() {
         return (
             <Card>
-                <Button onPress={ this.submitHandler.bind(this) } title={"Logout"} />
+                <Button onPress={ this.submitHandler.bind(this) } title={'Logout'} />
             </Card>
         );
     }

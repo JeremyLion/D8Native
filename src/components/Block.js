@@ -26,19 +26,19 @@ class Block extends Component {
 
 const styles = StyleSheet.create({
     block: {
-        flex: 1
+        flex: 1,
     },
     row: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     center: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     middle: {
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     right: {
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
 });
 

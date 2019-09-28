@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Image, StyleSheet, Dimensions, StatusBar } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
-import { connect } from "react-redux";
-import { loginUser } from "../actions/authActions";
-import Block from "../components/Block"
+import React, { Component } from 'react';
+import { Image, StyleSheet, Dimensions, StatusBar } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/authActions';
+import Block from '../components/Block';
 const { width } = Dimensions.get('window');
 
 class Login extends Component {
@@ -13,7 +13,7 @@ class Login extends Component {
         this.state = {
             credentials: {
                 username: '',
-                password: ''
+                password: '',
             },
             loading: false,
         }
@@ -21,13 +21,13 @@ class Login extends Component {
 
     handleChange(name, value) {
         this.setState({
-            credentials: { ...this.state.credentials, [name]: value }
+            credentials: { ...this.state.credentials, [name]: value },
         })
     }
 
     submitHandler(e) {
         const { credentials } = this.state;
-        this.props.dispatch(loginUser(credentials))
+        this.props.dispatch(loginUser(credentials));
     }
 
     render() {
@@ -52,7 +52,7 @@ class Login extends Component {
                                 containerStyle={ styles.inputContainer }
                                 labelStyle={ styles.labelStyle }
                                 inputStyle={ styles.inputStyle }
-                                onChangeText={ (txt) => this.handleChange("username", txt) }
+                                onChangeText={ (txt) => this.handleChange('username', txt) }
                                 value={ this.state.credentials.username }
                             />
                             <Input
@@ -61,7 +61,7 @@ class Login extends Component {
                                 labelStyle={ styles.labelStyle }
                                 containerStyle={ styles.inputContainer }
                                 inputStyle={ styles.inputStyle }
-                                onChangeText={ (txt) => this.handleChange("password", txt) }
+                                onChangeText={ (txt) => this.handleChange('password', txt) }
                                 value={ this.state.credentials.password }
                             />
                             <Text
@@ -78,7 +78,7 @@ class Login extends Component {
                                     Don't have an account? <Text
                                         height={ 18 }
                                         color="blue"
-                                        onPress={ () => navigation.navigate('Register') } >
+                                        onPress={ () => this.props.navigation.navigate('Register') } >
                                           Sign up
                                     </Text>
                                 </Text>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     inputStyle: {
-        color: '#000'
+        color: '#000',
     },
     labelStyle: {
         color: '#000',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: width - 70,
         color: '#666666',
-        textAlign:'right'
+        textAlign:'right',
     },
     loginBtn: {
         justifyContent: 'center',
@@ -128,14 +128,14 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 1, width: 0 },
         shadowOpacity: 1,
         shadowRadius: 1,
-        width: width - 70
-    }
+        width: width - 70,
+    },
 });
 
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
     }
 }
 

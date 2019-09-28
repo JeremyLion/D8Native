@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
-import config from "../config";
+import config from '../config';
 import QueryString from 'query-string';
 import {
     LOGIN_USER,
@@ -9,7 +9,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_USER
-} from "./types";
+} from './types';
 
 export const authLogout = () => {
     return {
@@ -47,7 +47,7 @@ export const fetchUser = () => {
         axios.get('/user', QueryString.stringify({
             header: {
                 'Authorization': 'Bearer ' + AsyncStorage.getItem('access_token')
-            }
+            },
         })
         .then(res => {
             dispatch({ type: AUTH_USER, payload: res.data })

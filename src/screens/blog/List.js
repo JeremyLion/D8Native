@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { StyleSheet, ActivityIndicator, Dimensions, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
-import { Card, Text, ButtonGroup } from "react-native-elements";
+import React, { Component } from 'react';
+import { StyleSheet, ActivityIndicator, Dimensions, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Card, Text, ButtonGroup } from 'react-native-elements';
 import config from '../../config';
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
-import * as Actions from "../../actions";
-import { Block } from '../../components'
+import { bindActionCreators } from 'redux';
+import * as Actions from '../../actions';
+import { Block } from '../../components';
 
 class List extends Component {
 
@@ -23,14 +23,14 @@ class List extends Component {
 
     renderList = () => {
         const { lists } = this.props;
-        if(lists) {
+        if (lists) {
             return (lists.data.map(el => {
                 return (
                     <TouchableOpacity
                         key={el.id}
                         onPress={ () => this.props.navigation.navigate({routeName: 'PostItem', key:'postItem_' + el.id, params: { nid: el.id }})}>
                         {lists.included.map(el_img => {
-                            if(el.relationships.field_image.data.id === el_img.id) {
+                            if (el.relationships.field_image.data.id === el_img.id) {
                                 return (
                                     <Card
                                         key={el.id}
@@ -49,23 +49,23 @@ class List extends Component {
     }
 
     updateIndex (selectedIndex) {
-        this.setState({selectedIndex})
+        this.setState({selectedIndex});
     }
 
     render() {
-        const component1 = () => <Text>Latest</Text>
-        const component2 = () => <Text>Most Visited</Text>
-        const component3 = () => <Text>Top Rated</Text>
+        const component1 = () => <Text>Latest</Text>;
+        const component2 = () => <Text>Most Visited</Text>;
+        const component3 = () => <Text>Top Rated</Text>;
 
-        const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
-        const { selectedIndex } = this.state
+        const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }];
+        const { selectedIndex } = this.state;
 
-        if(this.props.isLoading === true) {
+        if (this.props.isLoading === true) {
             return (
                 <Card>
                     <ActivityIndicator/>
                 </Card>
-            )
+            );
         }
 
         return (
@@ -87,13 +87,13 @@ const styles = StyleSheet.create({
         marginRight: 0,
         marginBottom: 5,
         padding:0
-    }
+    },
 });
 
 const mapStateToProps = (state) => {
     return {
         lists: state.blog.listItems,
-        isLoading: state.blog.isLoading
+        isLoading: state.blog.isLoading,
     }
 }
 

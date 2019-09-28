@@ -5,8 +5,8 @@ import {
     BLOG_LIST,
     BLOG_ADD,
     BLOG_ITEM,
-    BLOG_CLEAR
-} from "../actions/types";
+    BLOG_CLEAR,
+} from '../actions/types';
 
 let INITIAL_STATE = {
     listItems: {},
@@ -17,7 +17,7 @@ let INITIAL_STATE = {
 const blog = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case BLOG_CLEAR:
-            return INITIAL_STATE
+            return INITIAL_STATE;
         case BLOG_ADD:
             return { ...state, isLoading:true }
         case BLOG_LIST:
@@ -32,4 +32,4 @@ const blog = (state = INITIAL_STATE, action) => {
     }
 }
 
-export default blog
+export default blog;

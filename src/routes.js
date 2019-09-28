@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native'
+import { View } from 'react-native';
 import { createAppContainer, createSwitchNavigator} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -8,10 +8,10 @@ import { Header, Icon } from 'react-native-elements';
 import Login from './screens/login';
 import MainScreen from './screens/main';
 import ShopPlans from './screens/shopPlans';
-import PostScreen from "./screens/blog/List";
-import listDetail from './screens/blog/listDetail'
+import PostScreen from './screens/blog/List';
+import listDetail from './screens/blog/listDetail';
 import AddPost from './screens/blog/form';
-import Account from "./screens/account";
+import Account from './screens/account';
 
 const ScreenConfig = navigation => {
     return {
@@ -33,12 +33,12 @@ export const AuthNavigator = createStackNavigator({
     Login: {
         screen: Login,
         navigationOptions:{
-            headerTitle: "Login"
-        }
-    }
+            headerTitle: 'Login',
+        },
+    },
 },
     {
-        headerMode: 'none'
+        headerMode: 'none',
     }
 );
 
@@ -46,8 +46,8 @@ export const PostNavigator = createStackNavigator({
     PostItem: {
         screen: listDetail,
         navigationOptions : {
-            gesturesEnabled: true
-        }
+            gesturesEnabled: true,
+        },
     },
 });
 
@@ -58,48 +58,48 @@ export const SignedIn = createBottomTabNavigator({
     Main: {
         screen: PostScreen,
         navigationOptions: {
-            headerTitle: "Main",
-            tabBarLabel: "Main",
+            headerTitle: 'Main',
+            tabBarLabel: 'Main',
             tabBarIcon: ({ tintColor }) => (
                 <Icon type="ionicon" name="ios-home" color={ tintColor } />
             ),
-        }
+        },
     },
     Shop: {
         screen: ShopPlans,
         navigationOptions: {
-            headerTitle: "Main",
-            tabBarLabel: "Main",
+            headerTitle: 'Main',
+            tabBarLabel: 'Main',
             tabBarIcon: ({ tintColor }) => (
                 <Icon type="SimpleLineIcons" name="home" color={ tintColor } />
-            )
-        }
+            ),
+        },
     },
     Post: {
         screen: AddPost,
         navigationOptions: {
-            Title: "Add Post",
-            tabBarLabel: "Add Post",
+            Title: 'Add Post',
+            tabBarLabel: 'Add Post',
             tabBarIcon: ({ tintColor }) => (
                 <Icon type="font-awesome" name="search" color={ tintColor } />
-            )
-        }
+            ),
+        },
     },
     Account: {
         screen: Account,
         navigationOptions:{
-            Title: "My Account",
-            tabBarLabel: "My Account",
+            Title: 'My Account',
+            tabBarLabel: 'My Account',
             tabBarIcon: ({ tintColor }) => (
                 <Icon type="font-awesome" name="user" color={ tintColor } />
-            )
-        }
-    }
+            ),
+        },
+    },
 },
     {
         navigationOptions: ({ navigation }) => {
-            const { routeName } = navigation.state.routes[navigation.state.index]
-            return ScreenConfig(routeName)
+            const { routeName } = navigation.state.routes[navigation.state.index];
+            return ScreenConfig(routeName);
         },
         tabBarOptions: {
             showLabel: true,
@@ -111,14 +111,14 @@ export const SignedIn = createBottomTabNavigator({
                 borderTopWidth: 0.5,
             },
             labelStyle: {
-                color: "#ccc",
+                color: '#ccc',
             },
             activeTintColor: '#000',
-            inactiveColor: '#454545'
+            inactiveColor: '#454545',
         },
         iconStyle: {
 
-        }
+        },
     },
 );
 
@@ -138,10 +138,10 @@ export const createRootNavigator = (loggedin) => {
         {
             SignedOut: AuthNavigator,
             SignedIn:  MainContainer,
-            PostNavigator
+            PostNavigator,
         },
         {
-            initialRouteName: loggedin ? "SignedIn" : "SignedOut"
+            initialRouteName: loggedin ? 'SignedIn' : 'SignedOut'
         }
     ));
 };

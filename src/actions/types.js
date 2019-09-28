@@ -1,12 +1,12 @@
 /**====================================================================*/
 /** Login
 /**====================================================================*/
-export const LOGIN_SUCCESS = "login_success";
-export const LOGIN_FAIL = "login_fail";
-export const LOGIN_USER = "login_user";
-export const LOGOUT_USER = "logout_user";
-export const AUTH_CHECK = "auth_check";
-export const AUTH_USER = "auth_user";
+export const LOGIN_SUCCESS = 'login_success';
+export const LOGIN_FAIL = 'login_fail';
+export const LOGIN_USER = 'login_user';
+export const LOGOUT_USER = 'logout_user';
+export const AUTH_CHECK = 'auth_check';
+export const AUTH_USER = 'auth_user';
 
 /**====================================================================*/
 /** blog

@@ -4,8 +4,8 @@ import {
     LOGIN_FAIL,
     LOGIN_USER,
     LOGOUT_USER,
-    AUTH_CHECK
-} from "../actions/types";
+    AUTH_CHECK,
+} from '../actions/types';
 
 let INITIAL_STATE = {
     username: '',

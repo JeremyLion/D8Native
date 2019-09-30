@@ -19,3 +19,12 @@ export const fonts = {
     lg: 28,
     primary: 'Poppins'
 }
+
+export const sizes = {
+    base: 16,
+    font: 14,
+    padding: 36,
+    margin: 36,
+    title: 24,
+    radius: 12,
+};

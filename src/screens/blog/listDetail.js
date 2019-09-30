@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, ActivityIndicator, View, Dimensions, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, Dimensions, ScrollView, SafeAreaView, ImageBackground, StatusBar, TouchableOpacity} from 'react-native';
 import HTML from 'react-native-render-html';
-import { Card, Text, Image } from 'react-native-elements';
+import { Card, Text, Icon, Button } from 'react-native-elements';
+import Moment  from 'react-moment';
 import config from '../../config/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -21,8 +22,28 @@ class listDetail extends Component {
         const nid = navigation.getParam('nid', null);
 
         if (nid) {
-            this.props.loadPost('article', nid + '?include=field_image')
+            this.props.loadPost('article', nid + '' +
+            '?include=field_image' +
+            '&include=field_image,uid,field_tags' +
+            '&fields[taxonomy_term--tags]=name')
         }
+    }
+
+    renderTags = () => {
+        const { postDetail } = this.props
+        return (postDetail.included.map(type => {
+            if (type.type === 'taxonomy_term--tags') {
+                return (
+                    <Button
+                        type="clear"
+                        style={ styles.tags }
+                        buttonStyle={ styles.tagsBtn }
+                        title={ type.attributes.name }
+                        titleStyle={ styles.tags }
+                    />
+                );
+            }
+        }))
     }
 
     renderPost = () => {
@@ -30,18 +51,30 @@ class listDetail extends Component {
         if (postDetail.data) {
             return (
                     <ScrollView>
-                        <Block middle>
+                        <Block middle style={ styles.containerWrapper }>
                             <View style={{ flex: 1}}>
-                                <Image
+                                <ImageBackground
                                     source={{ uri: config.base + postDetail.included[0].attributes.uri.url }}
                                     PlaceholderContent={<ActivityIndicator />}
-                                    style={{ flex:1, width: width, height: 200 }}
-                                />
-                                <View style={ styles.overlay }/>
+                                    resizeMode={'cover'}
+                                    style={{ width, height: width }}>
+                                    <TouchableOpacity
+                                        style={ styles.button }
+                                        onPress={ () => this.props.navigation.navigate('SignedIn') }>
+                                        <Icon type={'font-awesome'} name={'chevron-left'} color={'#fff'} containerStyle={{ ...styles.backBtn, left: 20 }} />
+                                        <Icon type={'font-awesome'} name={'bookmark-o'} color={'#fff'} containerStyle={{...styles.backBtn, right: 20 }} />
+                                    </TouchableOpacity>
+                                </ImageBackground>
                             </View>
                             <View style={ styles.contentWrapper }>
+                                <Block row>
+                                    { this.renderTags() }
+                                </Block>
                                 <Text style={ styles.title }>{ postDetail.data.attributes.title }</Text>
-                                <HTML containerStyle={ styles.content } html={ postDetail.data.attributes.body.value } imagesMaxWidth={{ height:100, width: 500 }} />
+                                <HTML
+                                    html={ postDetail.data.attributes.body.value }
+                                    tagsStyles={{ 'rawtext': { ...styles.content }, 'p': {fontSize: 14}}}
+                                    imagesMaxWidth={{ width: width }} />
                             </View>
                         </Block>
                     </ScrollView>
@@ -53,6 +86,7 @@ class listDetail extends Component {
 
         return (
             <View>
+                <StatusBar backgroundColor="blue" barStyle="light-content" />
                 { this.renderPost() }
             </View>
         );
@@ -61,27 +95,72 @@ class listDetail extends Component {
 
 const styles = StyleSheet.create({
     containerWrapper: {
+        backgroundColor: '#000',
         marginLeft: 0,
         marginRight: 0,
         marginBottom: 5,
-        padding:0
+        padding:0,
+        borderRadius: 20,
+        borderWidth: 2,
+        overflow: 'hidden'
     },
     title: {
-        fontSize: 16,
-        fontWeight: 'bold'
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 20
     },
     contentWrapper:{
-        padding: 20,
-
+        paddingTop: 30,
+        padding: 10,
+        borderWidth: 0.5,
+        borderBottomWidth: 0,
+        borderLeftWidth: 10,
+        backgroundColor: 'white',
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderTopColor: '#fff',
+        borderBottomColor: '#fff',
+        borderLeftColor: '#fff',
+        borderRightColor: '#fff',
     },
     content: {
-        borderTopWidth: 0.5,
         marginTop: 10,
-        borderColor: '#ccc'
+        fontSize: 14,
+        lineHeight: 22,
+        color: '#666666'
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.5)'
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    tagsBtn: {
+        padding:5
+    },
+    tags: {
+        backgroundColor: '#f2f2f2',
+        paddingTop: 0,
+        paddingBottom: 0,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderRadius: 100,
+        borderWidth: 1,
+        marginRight: 10,
+        borderColor: '#fff',
+        fontSize: 14,
+        color: '#000'
+    },
+    backBtn: {
+        width:30,
+        height:30,
+        alignItems:'center',
+        justifyContent:'center',
+        overflow:'hidden',
+        borderRadius:20,
+        position:'absolute',
+        top:40,
     }
 });
 

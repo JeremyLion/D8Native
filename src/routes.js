@@ -7,7 +7,7 @@ import { Header, Icon } from 'react-native-elements';
 
 import Login from './screens/login';
 import MainScreen from './screens/main';
-import ShopPlans from './screens/shopPlans';
+import Search from './screens/search';
 import PostScreen from './screens/blog/list';
 import listDetail from './screens/blog/listDetail';
 import AddPost from './screens/blog/form';
@@ -73,13 +73,13 @@ export const SignedIn = createBottomTabNavigator({
             ),
         },
     },
-    Shop: {
-        screen: ShopPlans,
+    Search: {
+        screen: Search,
         navigationOptions: {
-            headerTitle: 'Main',
-            tabBarLabel: 'Main',
+            headerTitle: 'Search',
+            tabBarLabel: 'Search',
             tabBarIcon: ({ tintColor }) => (
-                <Icon type="SimpleLineIcons" name="home" color={ tintColor } />
+                <Icon type="font-awesome" name="search" color={ tintColor } />
             ),
         },
     },
@@ -89,7 +89,7 @@ export const SignedIn = createBottomTabNavigator({
             Title: 'Add Post',
             tabBarLabel: 'Add Post',
             tabBarIcon: ({ tintColor }) => (
-                <Icon type="font-awesome" name="search" color={ tintColor } />
+                <Icon type="material" name="add" color={ tintColor } />
             ),
         },
     },

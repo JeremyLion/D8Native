@@ -24,7 +24,7 @@ const auth = (state = INITIAL_STATE, action) => {
         case LOGIN_SUCCESS:
             return login({...state, payload: action.payload});
         case LOGIN_FAIL:
-            return { ...state, error: action.payload, isLoading: false };
+            return { ...state, payload: action.payload, isLoading: false };
         case LOGOUT_USER:
             return logout(state);
         default:
@@ -33,10 +33,9 @@ const auth = (state = INITIAL_STATE, action) => {
 };
 
 function login(state, data) {
-    console.log(state.payload);
 
-    AsyncStorage.setItem('access_token', 'dummy token set');
-//    AsyncStorage.setItem('access_token', state.payload['access_token']);
+//    AsyncStorage.setItem('access_token', 'dummy token set');
+    AsyncStorage.setItem('access_token', state.payload['access_token']);
     return {
         ...state, isAuthenticated: true, isLoading: false
     }

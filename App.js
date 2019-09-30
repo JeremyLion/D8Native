@@ -18,7 +18,7 @@ class App extends Component {
     );
 
     render() {
-//        console.disableYellowBox = true
+        console.disableYellowBox = true
         return (
             <Provider store={store}>
                 <PersistGate persistor={persistor} loading={this.renderLoading()}>

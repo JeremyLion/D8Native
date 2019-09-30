@@ -11,7 +11,7 @@ class Block extends Component {
             center && styles.center,
             middle && styles.middle,
             right && styles.right,
-            space && { justifyContent: `space=${space}` },
+            space && { justifyContent: `space-${space}` },
             row && styles.row,
             style,
         ];

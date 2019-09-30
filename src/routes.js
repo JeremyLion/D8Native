@@ -8,12 +8,14 @@ import { Header, Icon } from 'react-native-elements';
 import Login from './screens/login';
 import MainScreen from './screens/main';
 import ShopPlans from './screens/shopPlans';
-import PostScreen from './screens/blog/List';
+import PostScreen from './screens/blog/list';
 import listDetail from './screens/blog/listDetail';
 import AddPost from './screens/blog/form';
 import Account from './screens/account';
 
 const ScreenConfig = navigation => {
+    console.log('navigation', navigation);
+
     return {
         header: props => (
             <Header
@@ -49,12 +51,12 @@ export const PostNavigator = createStackNavigator({
             gesturesEnabled: true,
         },
     },
-    navigationOptions: ({ navigation }) => {
+    navigationOptions: navigation => {
         const { routeName } = navigation.state.routes[navigation.state.index];
         return ScreenConfig(routeName);
     },
 },{
-    headerMode: 'none'
+    headerMode: 'none',
 });
 
 /**
@@ -64,8 +66,8 @@ export const SignedIn = createBottomTabNavigator({
     Main: {
         screen: PostScreen,
         navigationOptions: {
-            headerTitle: 'Main',
-            tabBarLabel: 'Main',
+            headerTitle: 'Drupal Blog',
+            tabBarLabel: 'Home',
             tabBarIcon: ({ tintColor }) => (
                 <Icon type="ionicon" name="ios-home" color={ tintColor } />
             ),
@@ -105,7 +107,16 @@ export const SignedIn = createBottomTabNavigator({
     {
         navigationOptions: ({ navigation }) => {
             const { routeName } = navigation.state.routes[navigation.state.index];
-            return ScreenConfig(routeName);
+            let nameSource;
+
+            switch (routeName) {
+                case 'Main':
+                    nameSource = 'Drupal Blog';
+                    break;
+                default:
+                    nameSource = '';
+            }
+            return ScreenConfig(nameSource);
         },
         tabBarOptions: {
             showLabel: true,
@@ -117,7 +128,7 @@ export const SignedIn = createBottomTabNavigator({
                 borderTopWidth: 0.5,
             },
             labelStyle: {
-                color: '#ccc',
+                color: '#000',
             },
             activeTintColor: '#000',
             inactiveColor: '#454545',

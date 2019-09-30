@@ -36,16 +36,15 @@ class Login extends Component {
                 enabled
                 behavior="padding"
                 style={{ flex: 1 }}>
-                <StatusBar barStyle="light-content" translucent={true} />
                 <Block center middle>
-                    <Block center style={{ marginTop: 100, height: 200, width: 200 }}>
+                    <Block center style={{ marginTop: 50, height: 200, width: 200 }}>
                         <Image
                             source={require('../assets/images/logo.png')}
                             style={{ height: 227, width: 239, resizeMode: 'stretch'}}
                         />
-
+                        <Text style={ styles.logo }>Drupal Blog</Text>
                     </Block>
-                    <Block flex={ 1.5 } style={{ ...styles.container }}>
+                    <Block flex={ 1.3 } style={{ ...styles.container }}>
                         <Block center style={{ ...styles.container, marginTop: 20 }}>
                             <Input
                                 label="Username"
@@ -96,6 +95,10 @@ const styles = StyleSheet.create({
         width: width - 50
 
     },
+    logo: {
+        paddingVertical: 30,
+        fontSize: 40
+    },
     inputContainer: {
         marginTop: 20,
         width: '100%',
@@ -105,7 +108,8 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         color: '#000',
-        fontSize: 14,
+        fontSize: 13,
+        fontWeight: '500'
     },
     textBtns: {
         color: '#000',
@@ -129,6 +133,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 1,
         width: width - 70,
+        marginBottom: 10,
     },
 });
 

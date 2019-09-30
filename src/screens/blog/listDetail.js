@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, ActivityIndicator, View, Button, Dimensions } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 import HTML from 'react-native-render-html';
-import { Card, Text } from 'react-native-elements';
+import { Card, Text, Image } from 'react-native-elements';
 import config from '../../config/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../../actions';
+import Block from '../../components/Block';
+const { width } = Dimensions.get('window');
+
 
 class listDetail extends Component {
 
@@ -26,29 +29,30 @@ class listDetail extends Component {
         const  { postDetail } = this.props;
         if (postDetail.data) {
             return (
-                <Card
-                    key={ postDetail.id }
-                    image={{ uri: config.base + postDetail.included[0].attributes.uri.url }}
-                    imageProps={{ 'PlaceholderContent': <ActivityIndicator /> }}>
-                    <Text>{ postDetail.data.attributes.title }</Text>
-                    <HTML html={ postDetail.data.attributes.body.value } imagesMaxWidth={Dimensions.get('window').width} />
-                </Card>
+                    <ScrollView>
+                        <Block middle>
+                            <View style={{ flex: 1}}>
+                                <Image
+                                    source={{ uri: config.base + postDetail.included[0].attributes.uri.url }}
+                                    PlaceholderContent={<ActivityIndicator />}
+                                    style={{ flex:1, width: width, height: 200 }}
+                                />
+                                <View style={ styles.overlay }/>
+                            </View>
+                            <View style={ styles.contentWrapper }>
+                                <Text style={ styles.title }>{ postDetail.data.attributes.title }</Text>
+                                <HTML containerStyle={ styles.content } html={ postDetail.data.attributes.body.value } imagesMaxWidth={{ height:100, width: 500 }} />
+                            </View>
+                        </Block>
+                    </ScrollView>
             );
         }
     }
 
     render() {
-        if (this.props.isLoading === true) {
-            return (
-                <View>
-                    <ActivityIndicator/>
-                </View>
-            );
-        }
 
         return (
             <View>
-                <Button title="Back" onPress={() => this.props.navigation.goBack(`PostItem_${this.props.navigation.state.params.nid}`)} />
                 { this.renderPost() }
             </View>
         );
@@ -62,6 +66,23 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         padding:0
     },
+    title: {
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    contentWrapper:{
+        padding: 20,
+
+    },
+    content: {
+        borderTopWidth: 0.5,
+        marginTop: 10,
+        borderColor: '#ccc'
+    },
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    }
 });
 
 const mapStateToProps = (state) => {

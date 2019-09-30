@@ -49,6 +49,12 @@ export const PostNavigator = createStackNavigator({
             gesturesEnabled: true,
         },
     },
+    navigationOptions: ({ navigation }) => {
+        const { routeName } = navigation.state.routes[navigation.state.index];
+        return ScreenConfig(routeName);
+    },
+},{
+    headerMode: 'none'
 });
 
 /**
